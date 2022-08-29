@@ -6,9 +6,11 @@ import { TextField, Button, Typography, Paper } from "@material-ui/core";
 import FileBase from "react-file-base64";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost, updatePost } from "../../redux/action/postAction";
+import { useNavigate } from "react-router-dom";
 
 const Form = ({ currentId, setCurrentId }) => {
   const classes = useStyles();
+  const navigate = useNavigate();
   const post = useSelector((state) =>
     currentId ? state?.posts.find((post) => post._id === currentId) : null
   );
@@ -39,7 +41,7 @@ const Form = ({ currentId, setCurrentId }) => {
     if (currentId) {
       dispatch(updatePost(currentId, { ...postData, name: user?.result }));
     } else {
-      dispatch(createPost({ ...postData, name: user?.result?.name }));
+      dispatch(createPost({ ...postData, name: user?.result?.name }, navigate));
     }
     handleClear();
     // setPostData({
@@ -72,7 +74,7 @@ const Form = ({ currentId, setCurrentId }) => {
     );
   }
   return (
-    <Paper className={classes.paper}>
+    <Paper className={classes.paper} elevation={6}>
       <form
         className={`${classes.root} ${classes.form}`}
         autoComplete="off"

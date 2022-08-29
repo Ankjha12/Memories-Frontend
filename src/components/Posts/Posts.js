@@ -8,13 +8,17 @@ import { useSelector } from "react-redux";
 
 const Posts = ({ setCurrentId }) => {
   const classes = useStyles();
-  const posts = useSelector((state) => state.posts);
+  const { posts, isLoading } = useSelector((state) => state.posts);
 
   console.log("Here Is the posts from Posts.js file", posts);
   return (
     <>
-      {!posts ? <h1>No Memories Found Please Create One</h1> : ""}
-      {posts.length > 0 ? (
+      {!posts.length && !isLoading ? (
+        <h1>No Memories Found Please Create One</h1>
+      ) : (
+        ""
+      )}
+      {!isLoading ? (
         <Grid
           className={classes.mainContainer}
           container
@@ -23,14 +27,24 @@ const Posts = ({ setCurrentId }) => {
         >
           {posts.map((post) => {
             return (
-              <Grid item key={post._id} xs={12} sm={6}>
+              <Grid item key={post._id} xs={12} sm={12} md={9} lg={4}>
                 <Post post={post} setCurrentId={setCurrentId} />
               </Grid>
             );
           })}
         </Grid>
       ) : (
-        <CircularProgress />
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+          }}
+        >
+          <CircularProgress />
+          <h5>Loading...</h5>
+        </div>
       )}
     </>
   );

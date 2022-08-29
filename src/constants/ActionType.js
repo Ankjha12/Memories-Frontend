@@ -1,4 +1,5 @@
 export const actionType = {
+  FETCH_POST: "FETCH_POST",
   FETCH_ALL: "FETCH_ALL",
   CREATE: "CREATE",
   UPDATE: "UPDATE",
@@ -6,4 +7,8 @@ export const actionType = {
   LIKE: "LIKE",
   AUTH: "AUTH",
   LOGOUT: "LOGOUT",
+  SEARCHPOST: "SEARCHPOST",
+  COMMENT_POST: "COMMENT_POST",
+  START_LOADING: "START_LOAING",
+  END_LOADING: "END_LOADING",
 };

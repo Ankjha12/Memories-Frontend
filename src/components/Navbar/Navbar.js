@@ -11,6 +11,8 @@ import {
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import decode from "jwt-decode";
+import MemoriesLogo from "../../images/memories-Logo.png";
+import MemoriesText from "../../images/memories-Text.png";
 
 import useStyles from "./style";
 
@@ -47,10 +49,9 @@ const Navbar = () => {
   };
 
   return (
-    <Container maxWidth="lg">
-      <AppBar className={classes.appBar} position="static" color="inherit">
-        <div className={classes.brandContainer}>
-          <Typography
+    <AppBar className={classes.appBar} position="static" color="inherit">
+      <Link to="/" className={classes.brandContainer}>
+        {/* <Typography
             component={Link}
             to="/"
             className={classes.heading}
@@ -58,54 +59,54 @@ const Navbar = () => {
             align="center"
           >
             Memories
-          </Typography>
-          <img
-            className={classes.image}
-            src="https://raw.githubusercontent.com/adrianhajdin/project_mern_memories/master/client/src/images/memories.png?token=AF56X74XONEUGZ4FD2FUIA27UURPI"
-            alt="memories"
-            height="60"
-          />
-        </div>
-        <Toolbar className={classes.toolbar}>
-          {user ? (
-            <div className={classes.profile}>
-              <Avatar
-                className={classes.purple}
-                alt={user?.result?.name}
-                src={user?.result?.imageUrl}
-              >
-                {user?.result?.name.charAt(0)}
-              </Avatar>
-              <Typography
-                style={{ color: "purple" }}
-                className={classes.userName}
-                variant="h6"
-              >
-                {user?.result?.name}
-                {console.log("UserName ===>>>>", user?.result?.name)}
-              </Typography>
-              <Button
-                className={classes.logout}
-                variant="contained"
-                color="secondary"
-                onClick={logout}
-              >
-                Logout
-              </Button>
-            </div>
-          ) : (
-            <Button
-              component={Link}
-              to="/auth"
-              variant="contained"
-              color="primary"
+          </Typography> */}
+        <img src={MemoriesText} alt="icon" height="45" />
+        <img
+          className={classes.image}
+          src={MemoriesLogo}
+          alt="memories"
+          height="45"
+        />
+      </Link>
+      <Toolbar className={classes.toolbar}>
+        {user ? (
+          <div className={classes.profile}>
+            <Avatar
+              className={classes.purple}
+              alt={user?.result?.name}
+              src={user?.result?.imageUrl}
             >
-              Sign In
+              {user?.result?.name.charAt(0)}
+            </Avatar>
+            <Typography
+              style={{ color: "purple" }}
+              className={classes.userName}
+              variant="h6"
+            >
+              {user?.result?.name}
+              {console.log("UserName ===>>>>", user?.result?.name)}
+            </Typography>
+            <Button
+              className={classes.logout}
+              variant="contained"
+              color="secondary"
+              onClick={logout}
+            >
+              Logout
             </Button>
-          )}
-        </Toolbar>
-      </AppBar>
-    </Container>
+          </div>
+        ) : (
+          <Button
+            component={Link}
+            to="/auth"
+            variant="contained"
+            color="primary"
+          >
+            Sign In
+          </Button>
+        )}
+      </Toolbar>
+    </AppBar>
   );
 };
 
